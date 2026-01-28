@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Bet365 Live Dashboard</title>
+  <link rel="stylesheet" href="/static/dashboard.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap">
+      <div class="title">
+        <div class="h1">Live Dashboard</div>
+        <div class="sub">Atualiza automaticamente (sem F5)</div>
+      </div>
+
+      <div class="controls">
+        <div class="field">
+          <label>Esporte</label>
+          <select id="sport">
+            <option value="1">Futebol (1)</option>
+            <option value="18">Basquete (18)</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Odds</label>
+          <select id="odds">
+            <option value="1">Incluir</option>
+            <option value="0">Não incluir</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Atualização (ms)</label>
+          <input id="interval" type="number" min="250" step="250" value="1000" />
+        </div>
+
+        <div class="field">
+          <label>Filtro</label>
+          <input id="filter" placeholder="time, liga, id..." />
+        </div>
+      </div>
+
+      <div class="stats">
+        <div class="pill">Status: <span id="status">parado</span></div>
+        <div class="pill">Jogos: <span id="count">0</span></div>
+        <div class="pill">Última: <span id="last">—</span></div>
+        <div class="pill">Latência: <span id="lat">—</span></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div id="grid" class="grid"></div>
+  </main>
+
+  <script src="/static/dashboard.js"></script>
+</body>
+</html>

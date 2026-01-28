@@ -1,88 +1,58 @@
+# Bet365 Live Scraper ⚽🏀
 
-# bet365-scraper, scrape Bet365 live score, include soccer and basketball, score and odds.
-# bet365 爬虫，抓取websocket数据，可以获取bet365的滚球，包括队伍信息实时比分、实时赔率。
+> **DISCLAIMER:** Este projeto é apenas para fins de estudo e pesquisa sobre WebSockets e interceptação de tráfego. O uso em produção pode violar os termos de serviço da Bet365.
 
-# English
-#### Function:
-Retrieve Live Football and Basketball Match Information from Bet365.
+Um sistema robusto para capturar dados em tempo real da Bet365, interceptando o tráfego WebSocket diretamente do navegador e disponibilizando-o através de uma API local fácil de consumir via JSON.
 
-#### Features:
-Get real-time football and basketball match information from Bet365, including teams, time, and score, encapsulated as an HTTP service for easy access.
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
+![Python](https://img.shields.io/badge/python-3.8%2B-blue)
+![Chrome](https://img.shields.io/badge/chrome-extension-google)
 
-#### Principle:
-Intercept WebSocket messages from Bet365’s webpage in the browser and send the data to an HTTP API service.
+## 📚 Documentação
 
-#### Deployment and Installation Steps:
-1.Install the Chrome extension chrome_extension on Chrome.
+- [**Guia de Arquitetura**](ARCHITECTURE.md): Explicação técnica detalhada de como o sistema funciona, diagramas de fluxo de dados e estrutura interna.
 
-2.Set up a Python environment and install the required libraries, Flask and Flask-CORS.
+## 🚀 Funcionalidades
 
-3.Run local_api.py ,for better HTTP performance, you may deploy a dedicated web server.
+- **Tempo Real**: Baixa latência (milisegundos) entre o evento no jogo e a API.
+- **WebSocket Hook**: Interceptação direta (`hook.js`) sem necessidade de emular tokens ou cookies complexos.
+- **API Simples**: Consuma dados sanitizados via JSON (`GET /live`).
+- **Multiesporte**: Suporte nativo para Futebol e Basquete.
 
-4.Open the browser extension panel and configure the upload URL to ensure data is successfully sent to local_api, the default URL is already set to http://127.0.0.1:8485/data
+## 🛠️ Instalação e Uso
 
-5.Open the Bet365 live betting page in your browser.Note that if you open the Chinese version, you must first change the language variable in local_api.py to "cn".
+### 1. API Local (Backend)
 
-#### How to Use the API:
-1.Get Football Matches (GET):
+Instale as dependências e rode o servidor:
 
-http://127.0.0.1:8485/live?sport=1
+```bash
+pip install flask flask-cors pytz
+python local_api.py
+```
+*O servidor iniciará em `http://127.0.0.1:8485`*
 
-2.Get Basketball Matches (GET):
+### 2. Extensão do Chrome
 
-http://127.0.0.1:8485/live?sport=18
+1. Abra o Chrome e vá para `chrome://extensions/`
+2. Ative o **Modo do desenvolvedor** (canto superior direito).
+3. Clique em **Carregar sem compactação** ("Load unpacked").
+4. Selecione a pasta `chrome_extention` deste repositório.
 
-3.Get websocket raw data(GET)：
+### 3. Rodando o Scraper
 
-http://127.0.0.1:8485/data
+1. Com o `local_api.py` rodando, abra o site da **Bet365** no navegador com a extensão instalada.
+2. Navegue até a seção "Ao Vivo" (In-Play).
+3. A extensão começará a enviar dados automaticamente para o seu servidor local.
+4. Verifique os dados recebidos:
+   - **Endpoint de Jogos**: [http://127.0.0.1:8485/live?sport=1](http://127.0.0.1:8485/live?sport=1) (Futebol)
+   - **Debug**: O console do servidor Python mostrará logs de `insert` e atualizações.
 
-4.Soccer Goal Line (GET)：
+## ⚙️ Configuração
 
-http://124.156.195.77:8365/b365/soccer/test/oneHd2allEv/C1-G15?lang=en
+Se precisar alterar a porta ou URL da API:
+1. Clique no ícone da extensão no Chrome.
+2. Insira a nova URL (ex: `http://localhost:9090/data`).
+3. Clique em Save.
 
-### Any question contact
-This project can only capture limited data, more data please contact
-
-Telegram: https://t.me/JoeBili
-
-# 中文
-#### 功能：
-获取bet365的足球篮球滚球比赛信息，包括队伍、时间、比分，封装为http以便读取。
-
-#### 原理：
-拦截浏览器中bet365网页的websocket消息，通过http发送到接口服务。
-
-#### 部署和安装步骤：
-1.在chrome上安装浏览器插件chrome_extention。
-
-2.部署python环境，安装好第三方库flask和flask_cors。
-
-3.运行local_api.py，如果为了更好的http接口性能可以自行部署专用的web。
-
-4.在浏览器插件中打开面板，配置upload url，确保数据能上传到local_api，默认已经配置都是http://127.0.0.1:8485/data
-
-5.在浏览器中打开bet365的滚球页面。注意如果打开的是英文版，要先将local_api.py中的language变量改为en。
-
-#### 如何调用接口:
-1.获取足球(GET)：
-
-http://127.0.0.1:8485/live?sport=1
-
-2.获取篮球(GET)：
-
-http://127.0.0.1:8485/live?sport=18
-
-3.获取websocket原始数据(GET)：
-
-http://127.0.0.1:8485/data
-
-4.足球大小球指数(GET)：
-
-http://124.156.195.77:8365/b365/soccer/test/oneHd2allEv/C1-G15
-
-### 问题交流
-此项目只能抓取有限数据，更多数据联系
-
-Telegram: https://t.me/JoeBili
-
-企鹅q：3403027828
+---
+*Desenvolvido com foco em performance e simplicidade.*

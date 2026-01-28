@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+env/
+
+# IDEs
+.idea/
+.vscode/
+.ipynb_checkpoints/
+
+# Logs and Data Dumps
+*.txt
+*.log
+gol_dumps/
+raw_websocket.txt
+raw_websocket.old.txt
+
+# Specific temp files/stores seen in directory
+MA
+OI
+int
+last
+market
+selection_data
+best
+{name
+Untitled.ipynb

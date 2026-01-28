@@ -2,16 +2,13 @@
   "manifest_version": 3,
   "name": "bet365 live scraper",
   "version": "1.0",
-  "icons":{
-    "128":"img/logo.png",
-    "48":"img/logo.png",
-    "16":"img/logo.png"
-  },
   "host_permissions": [
-    "https://*/*"
+    "https://*/*",
+    "http://127.0.0.1/*",
+    "http://localhost/*"
   ],
   "permissions": [
-    "storage", "activeTab", "scripting", "background"
+    "storage"
   ],
   "background": {
     "service_worker": "js/background.js"
@@ -28,9 +25,7 @@
   ],
   "web_accessible_resources": [
     {
-      "resources": [
-        "js/hook.js"
-      ],
+      "resources": ["js/hook.js"],
       "matches": ["<all_urls>"]
     }
   ]

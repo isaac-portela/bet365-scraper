@@ -1,15 +1,21 @@
-function injectJs(href, callback){
-    const script = document.createElement("script");
-    script.setAttribute("type", "text/javascript");
-    script.src = href;
-    script.onload = callback;
-    document.body.appendChild(script);
-}
+// js/content.js
 
-injectJs(chrome.runtime.getURL("js/hook.js"));
+// Injeta hook.js no contexto da página
+(function injectHook() {
+  const s = document.createElement("script");
+  s.src = chrome.runtime.getURL("js/hook.js");
+  s.onload = () => s.remove();
+  (document.head || document.documentElement).appendChild(s);
+})();
 
-
-
-window.addEventListener("sendToAPI", async Ot => {
-    chrome.runtime.sendMessage({ type: "SEND_HTTP", data: Ot.detail});
-})
+// Escuta o CustomEvent do hook e repassa pro background
+window.addEventListener("sendToAPI", (event) => {
+  try {
+    chrome.runtime.sendMessage({
+      type: "SEND_HTTP",
+      data: event.detail
+    });
+  } catch (e) {
+    console.error("content.js sendMessage error:", e);
+  }
+});
